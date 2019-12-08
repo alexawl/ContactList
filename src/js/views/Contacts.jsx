@@ -1,18 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import ContactCard from "../component/ContactCard.js";
-import Modal from "../component/Modal";
+import store from "../store/store.js";
 
-export default class Contacts extends React.Component {
+export default class Contacts extends Flux.DashView {
 	constructor() {
 		super();
 		this.state = {
-			showModal: false
+			contacts: []
 		};
 	}
-
+    componentDidMount(){
+        this.subscribe(store, "contacts", (contacts) =>{
+            this.setState({Contacts});
+        });
+    }
 	render() {
+        const cards = this.state.contacts.map((c.i)=> {
+          return <ContactCard key={i} data={c} />;  
+        })
 		return (
 			<div className="container">
 				<div>
@@ -23,14 +29,16 @@ export default class Contacts extends React.Component {
 					</p>
 					<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 						<ul className="list-group pull-down" id="contact-list">
-							<ContactCard onDelete={() => this.setState({ showModal: true })} />
-							<ContactCard />
+							{cards}
+                            <ContactCard onDelete={() => this.setState({ showModal: true })} />
+							
+                            <ContactCard />
 							<ContactCard />
 							<ContactCard />
 						</ul>
 					</div>
 				</div>
-				<Modal show={this.state.showModal} onClose={() => this.setState({ showModal: false })} />
+				
 			</div>
 		);
 	}

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import injectContext from "./store/appContext";
 
-import Contacts from "./views/Contacts.js";
+import Contacts from "./views/Contacts.jsx";
 import AddContact from "./views/AddContact.js";
 
 export class Layout extends React.Component {
