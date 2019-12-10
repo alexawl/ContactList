@@ -12,7 +12,7 @@ export default class Contacts extends Flux.DashView {
 		};
 	}
 	componentDidMount() {
-		this.subscribe(store, "contacts", contacts => {
+		this.subscribe(store, "contacts", () => {
 			this.setState({ Contacts });
 		});
 	}

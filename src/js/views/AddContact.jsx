@@ -1,7 +1,20 @@
 import React from "react";
+import Flux from "@4ggeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
-
-export default class AddContact extends React.Component {
+import * as actions from "../actions/actions";
+import store from "../store/store";
+export default class Contacts extends Flux.DashView {
+	constructor() {
+		super();
+		this.state = {
+			full_name: ""
+		};
+	}
+	componentDidMount() {
+		this.subscribe(store, "contacts", () => {
+			this.props.hiatory.push("/");
+		});
+	}
 	render() {
 		return (
 			<div className="container">
@@ -10,7 +23,16 @@ export default class AddContact extends React.Component {
 					<form>
 						<div className="form-group">
 							<label>Full Name</label>
-							<input type="text" className="form-control" placeholder="Full Name" />
+							<input
+								type="text"
+								className="form-control"
+								placeholder="Full Name"
+								onChange={e =>
+									this.setState({
+										full_name: e.target.value
+									})
+								}
+							/>
 						</div>
 						<div className="form-group">
 							<label>Email</label>
@@ -24,7 +46,14 @@ export default class AddContact extends React.Component {
 							<label>Address</label>
 							<input type="text" className="form-control" placeholder="Enter address" />
 						</div>
-						<button type="button" className="btn btn-primary form-control">
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() =>
+								actions.AddContact({
+									full_name: this.state.full_name
+								})
+							}>
 							save
 						</button>
 						<Link className="mt-3 w-100 text-center" to="/">
