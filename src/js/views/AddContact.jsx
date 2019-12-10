@@ -2,7 +2,7 @@ import React from "react";
 import Flux from "@4ggeksacademy/react-flux-dash";
 import { Link } from "react-router-dom";
 import * as actions from "../actions/actions";
-import store from "../store/store";
+import store from "../stores/store";
 export default class Contacts extends Flux.DashView {
 	constructor() {
 		super();
@@ -11,7 +11,7 @@ export default class Contacts extends Flux.DashView {
 		};
 	}
 	componentDidMount() {
-		this.subscribe(store, "contacts", () => {
+		this.subscribe(store, "contacts", contacts => {
 			this.props.hiatory.push("/");
 		});
 	}

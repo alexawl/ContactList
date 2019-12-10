@@ -3,9 +3,9 @@ import AddContact from "../views/AddContact";
 import Contacts from "../views/Contacts";
 import store from "../store/store.js";
 
-export let AddContact = contacts => {
-	let contacts = store.getEvent("contacts");
-	if (!contacts) contacts = [contacts];
-	else contacts.push(contacts);
+export let AddContact = contact => {
+	let contacts = store.getState("contacts");
+	if (!contacts) contacts = [contact];
+	else contacts.push(contact);
 	Flux.dispatchEvent("contacts", contacts);
 };

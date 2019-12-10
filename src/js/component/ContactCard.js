@@ -27,11 +27,11 @@ class ContactCard extends React.Component {
 							<button className="btn">
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>
-							<button className="btn" onClick={() => this.props.onDelete()}>
-								<i className="fas fa-trash-alt" />
-							</button>
+							<button className="btn" onClick={() => this.props.history()}></button>
+							<button className="btn" onClick={() => this.props.onDelete()}></button>
+							<i className="fas fa-trash-alt" />
 						</div>
-						<label className="name lead">Mike Anamendolla</label>
+						<label className="name lead">{this.props.data.full_name}</label>
 						<br />
 						<i className="fas fa-map-marker-alt text-muted mr-3" />
 						<span className="text-muted">5842 Hillcrest Rd</span>
@@ -62,9 +62,10 @@ class ContactCard extends React.Component {
  * Define the data-types for
  * your component's properties
  **/
-ContactCard.propTypes = {
+ContactropTypes = {
 	history: PropTypes.object,
-	onDelete: PropTypes.func
+	onDelete: PropTypes.func,
+	data: PropTypes.object
 };
 
 /**

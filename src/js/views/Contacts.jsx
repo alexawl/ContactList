@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ContactCard from "../component/ContactCard.js";
-import store from "../store/store.js";
+import store from "../stores/store.js";
 import Flux from "@4geeksacademy/react-flux-dash";
 
 export default class Contacts extends Flux.DashView {
@@ -12,7 +12,9 @@ export default class Contacts extends Flux.DashView {
 		};
 	}
 	componentDidMount() {
-		this.subscribe(store, "contacts", () => {
+		let contacts = store.getState("contacts");
+		if (contacts) this.setState({ Contacts });
+		this.subscribe(store, "contacts", contacts => {
 			this.setState({ Contacts });
 		});
 	}
