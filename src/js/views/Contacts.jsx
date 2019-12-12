@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ContactCard from "../component/ContactCard.js";
-import store from "../stores/store.js";
+import ContactCard from "../component/ContactCard";
+import store from "../stores/store";
+import * as actions from "../actions/actions";
 import Flux from "@4geeksacademy/react-flux-dash";
 
 export default class Contacts extends Flux.DashView {
@@ -20,7 +21,7 @@ export default class Contacts extends Flux.DashView {
 	}
 	render() {
 		const cards = this.state.contacts.map((c, i) => {
-			return <ContactCard key={i} data={c} />;
+			return <ContactCard key={i} data={c} onDelete={contact => actions.deleteContact(contact)} />;
 		});
 		return (
 			<div className="container">
